@@ -1,25 +1,25 @@
 import streamlit as st
 
 st.set_page_config(
-    page_title="Beijing Air Quality App",
+    page_title="Air Quality Analytics",
     page_icon="🌫️",
     layout="wide"
 )
 
-st.title("🌫️ Beijing Air Quality Analytics")
+st.title("🌫️ Air Quality Analytics Dashboard")
 st.markdown("---")
 
 st.write("""
-This application provides an interactive platform to explore, visualise, and predict
-PM2.5 air pollution across four Beijing monitoring stations (2013–2017).
+This application provides an interactive platform to explore, visualise,
+and predict air quality metrics from any uploaded dataset.
 
 **Use the sidebar to navigate between sections:**
 
 | Page | Description |
 |------|-------------|
-| 📂 Dataset | Upload and preview the merged Beijing dataset |
-| 📊 Visualisations | Explore pollutant trends and distributions |
-| 🤖 Model Outputs | View PM2.5 prediction results and feature importance |
+| 📂 Dataset | Upload and preview your CSV dataset |
+| 📊 Visualisations | Explore trends, distributions and correlations |
+| 🤖 Model Outputs | Train models and view prediction results |
 """)
 
-st.info("👈 Select a page from the sidebar to begin.")
+st.info("👈 Upload your dataset on the **Dataset** page first, then explore the other sections.")

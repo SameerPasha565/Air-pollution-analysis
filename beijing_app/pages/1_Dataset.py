@@ -8,7 +8,7 @@ st.markdown("---")
 
 DATA_PATH = "uploaded_data.csv"
 
-uploaded_file = st.file_uploader("Upload your merged Beijing CSV dataset", type="csv")
+uploaded_file = st.file_uploader("Upload your CSV dataset", type="csv")
 
 if uploaded_file is not None:
     df = pd.read_csv(uploaded_file)
@@ -18,7 +18,7 @@ elif os.path.exists(DATA_PATH):
     df = pd.read_csv(DATA_PATH)
     st.info("📁 Using previously uploaded dataset.")
 else:
-    st.warning("⚠️ Please upload your merged Beijing dataset to begin.")
+    st.warning("⚠️ Please upload a CSV dataset to begin.")
     st.stop()
 
 # ── Dataset Shape ──────────────────────────────────────────
@@ -26,7 +26,13 @@ st.subheader("Dataset Dimensions")
 col1, col2, col3 = st.columns(3)
 col1.metric("Total Rows", f"{df.shape[0]:,}")
 col2.metric("Total Columns", df.shape[1])
-col3.metric("Stations", df['station'].nunique() if 'station' in df.columns else "N/A")
+
+object_cols = df.select_dtypes(include='object').columns.tolist()
+if object_cols:
+    group_col = st.selectbox("Group/Station Column (for count)", object_cols)
+    col3.metric(f"Unique {group_col}", df[group_col].nunique())
+else:
+    col3.metric("Unique Categories", "N/A")
 
 st.markdown("---")
 
